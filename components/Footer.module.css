@@ -1,0 +1,31 @@
+.footer {
+  padding: 20px;
+  background-color: #ccf1fb;
+  color: #333;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  text-align: center;
+}
+
+.socialLinks {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.socialLinks a img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.socialLinks a img:hover {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+}
+
+.copy {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  color: gray;
+}

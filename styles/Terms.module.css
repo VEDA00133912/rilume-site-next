@@ -1,0 +1,89 @@
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px 20px;
+  margin: 20px;
+  color: #1a1a1a;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.termsSection, .privacySection {
+  background-color: white;
+  border: 2px solid #8ab0cc;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 900px;
+  width: 90%;
+  height: 120px;
+  overflow-y: auto;
+  text-align: left;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.termsSection h2, .privacySection h2 {
+  color: #5985de;
+  margin-top: 0;
+}
+
+.termsSection p, .privacySection p {
+  color: #333;
+  line-height: 1.6;
+  font-size: 1em;
+}
+
+/* スクロールバー */
+.termsSection::-webkit-scrollbar,
+.privacySection::-webkit-scrollbar {
+  width: 8px;
+  background-color: #abd2ef33;
+  border-radius: 4px;
+}
+
+.termsSection::-webkit-scrollbar-thumb,
+.privacySection::-webkit-scrollbar-thumb {
+  background-color: #8ab0cc99;
+  border-radius: 4px;
+}
+
+/* レスポンシブ */
+@media (max-width: 1024px) {
+  .termsSection, .privacySection {
+    height: 110px;
+    padding: 18px;
+  }
+
+  .termsSection p, .privacySection p {
+    font-size: 0.95em;
+  }
+}
+
+@media (max-width: 768px) {
+  .termsSection, .privacySection {
+    height: 100px;
+    padding: 15px;
+  }
+
+  .termsSection p, .privacySection p {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .termsSection, .privacySection {
+    height: 90px;
+    padding: 12px;
+    margin: 10px auto;
+  }
+
+  .termsSection h2, .privacySection h2 {
+    font-size: 1.2em;
+  }
+
+  .termsSection p, .privacySection p {
+    font-size: 0.85em;
+  }
+}
