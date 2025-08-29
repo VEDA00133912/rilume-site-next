@@ -6,16 +6,31 @@ import BotHeader from '../../components/BotHeader';
 import CommandsPage from '../../components/CommandsPage';
 import styles from '../../styles/Commands.module.css';
 
+type DiscordCommandOption = {
+  type: number;
+  name: string;
+  description: string;
+  required?: boolean;
+  choices?: { name: string; value: string | number }[];
+  options?: DiscordCommandOption[];
+};
+
+type DiscordCommand = {
+  id: string;
+  type: number;
+  name: string;
+  description: string;
+  options?: DiscordCommandOption[];
+};
+
 export default function Page() {
-  const botName = "{ Rilume }";
-  const botIcon = "/images/meta/bot-icon.png";
-  const [commands, setCommands] = useState<any[]>([]);
+  const [commands, setCommands] = useState<DiscordCommand[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api/commands')
       .then(res => res.json())
-      .then(data => {
+      .then((data: DiscordCommand[]) => {
         setCommands(data);
         setLoading(false);
       })
@@ -29,7 +44,7 @@ export default function Page() {
     <>
       <Nav />
       <main className={styles.main}>
-        <BotHeader botName={botName} botIcon={botIcon} titleSuffix="コマンド一覧" />
+        <BotHeader titleSuffix='コマンド一覧' />
         {loading ? <p>Loading commands...</p> : <CommandsPage commands={commands} />}
       </main>
       <Footer />

@@ -1,11 +1,27 @@
 import { NextResponse } from 'next/server';
 import cron from 'node-cron';
 
-let cachedCommands: any[] = [];
-let lastFetched = 0;
+type DiscordCommandOption = {
+  type: number;
+  name: string;
+  description: string;
+  required?: boolean;
+  choices?: { name: string; value: string | number }[];
+  options?: DiscordCommandOption[];
+};
 
-const BOT_TOKEN = process.env.BOT_TOKEN;
-const APP_ID = process.env.BOT_ID;
+type DiscordCommand = {
+  id: string;
+  type: number;
+  name: string;
+  description: string;
+  options?: DiscordCommandOption[];
+};
+
+let cachedCommands: DiscordCommand[] = [];
+
+const BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
+const APP_ID = process.env.DISCORD_APP_ID;
 if (!BOT_TOKEN || !APP_ID) {
   console.warn('Bot token or app ID not set');
 }
@@ -20,25 +36,28 @@ async function fetchCommandsFromDiscord() {
     });
 
     if (!res.ok) throw new Error(`Discord API returned ${res.status}`);
-    const commands = await res.json();
+    const commands: DiscordCommand[] = await res.json();
     cachedCommands = commands;
-    lastFetched = Date.now();
     console.log(`[${new Date().toLocaleString()}] Discord commands updated (${commands.length} commands)`);
-  } catch (err: any) {
-    console.error('Failed to fetch Discord commands:', err.message);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error('Failed to fetch Discord commands:', err.message);
+    } else {
+      console.error('Unknown error fetching Discord commands');
+    }
   }
 }
 
-// 初回起動時に取得
 fetchCommandsFromDiscord();
 
-// 毎日0時に更新 (日本時間)
-cron.schedule('0 0 * * *', () => {
-  console.log('Scheduled command update at 00:00 JST');
-  fetchCommandsFromDiscord();
-}, {
-  timezone: 'Asia/Tokyo'
-});
+cron.schedule(
+  '0 0 * * *',
+  () => {
+    console.log('Scheduled command update at 00:00 JST');
+    fetchCommandsFromDiscord();
+  },
+  { timezone: 'Asia/Tokyo' }
+);
 
 export async function GET() {
   if (!cachedCommands.length) await fetchCommandsFromDiscord();

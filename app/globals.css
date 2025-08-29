@@ -8,3 +8,156 @@ html, body {
   background-color: #ccf1fb;
   min-height: 100vh;
 }
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.bot-icon {
+  border-radius: 50%;
+  border: 3px solid #8ab0cc;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+.bot-title {
+  margin: 0;
+  font-size: 3em;
+  color: #8ab0cc;
+  text-shadow: 
+    -2px -2px 0 white,
+     2px -2px 0 white,
+    -2px  2px 0 white,
+     2px  2px 0 white;
+}
+
+.nav {
+  background-color: #abd2ef;
+  padding: 10px 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+}
+
+.nav-list li a {
+  text-decoration: none;
+  color: #1a1a1a;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.nav-list li a:hover {
+  background-color: #8ab0cc;
+  color: white;
+}
+
+.top-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 1000;
+  font-size: 24px;
+  padding: 10px 15px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.top-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.footer {
+  padding: 20px;
+  background-color: #ccf1fb;
+  color: #333;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  text-align: center;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.icon-wrapper {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.icon-wrapper:hover {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+}
+
+.copy {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  color: gray;
+}
+
+@media (max-width: 768px) {
+  .bot-title {
+    font-size: 2em;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav {
+    padding: 10px;
+  }
+
+  .top-btn {
+    bottom: 20px;
+    right: 20px;
+    font-size: 20px;
+    padding: 8px 12px;
+  }
+
+  .footer {
+    padding: 15px;
+  }
+
+  .social-links {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bot-title {
+    font-size: 1.5em;
+  }
+
+  .nav-list li a {
+    padding: 4px 8px;
+    font-size: 14px;
+  }
+
+  .top-btn {
+    font-size: 18px;
+    padding: 6px 10px;
+  }
+}

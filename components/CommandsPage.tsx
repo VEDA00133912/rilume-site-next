@@ -1,24 +1,36 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import Image from 'next/image';
 import styles from '../styles/Commands.module.css';
 
-type Command = {
+type DiscordCommandOption = {
+  type: number;
   name: string;
-  description?: string;
-  type?: number;
-  options?: any[];
+  description: string;
+  required?: boolean;
+  choices?: { name: string; value: string | number }[];
+  options?: DiscordCommandOption[];
+};
+
+type DiscordCommand = {
+  id: string;
+  type: number;
+  name: string;
+  description: string;
+  options?: DiscordCommandOption[];
 };
 
 type Props = {
-  commands: Command[];
+  commands: DiscordCommand[];
 };
 
 const CommandsPage: React.FC<Props> = ({ commands }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalData, setModalData] = useState<Command | null>(null);
+  const [modalData, setModalData] = useState<DiscordCommand | null>(null);
+  const [imageExists, setImageExists] = useState(false);
 
-  const openModal = (cmd: Command) => {
+  const openModal = (cmd: DiscordCommand) => {
     setModalData(cmd);
     setModalOpen(true);
   };
@@ -26,14 +38,24 @@ const CommandsPage: React.FC<Props> = ({ commands }) => {
   const closeModal = () => {
     setModalOpen(false);
     setModalData(null);
+    setImageExists(false);
   };
+
+  useEffect(() => {
+    if (!modalData) return;
+
+    const img = new window.Image();
+    img.src = `/images/commands/${modalData.name}.png`;
+    img.onload = () => setImageExists(true);
+    img.onerror = () => setImageExists(false);
+  }, [modalData]);
 
   const slashCommands = commands.filter(c => c.description);
   const contextCommands = commands.filter(c => !c.description);
   const userCommands = contextCommands.filter(c => c.type === 2);
   const messageCommands = contextCommands.filter(c => c.type === 3);
 
-  const renderCommandCard = (cmd: Command, isContext = false) => (
+  const renderCommandCard = (cmd: DiscordCommand, isContext = false) => (
     <div
       key={cmd.name}
       className={`${styles.commandCard} ${isContext ? styles.context : ''}`}
@@ -56,24 +78,32 @@ const CommandsPage: React.FC<Props> = ({ commands }) => {
       <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
         <span className={styles.modalClose} onClick={closeModal}>&times;</span>
         <h3>{modalData.name}</h3>
-        {modalData.description && <p>{modalData.description}</p>}
+        <p>{modalData.description || 'このコマンドはコンテキストメニューです'}</p>
 
-        <img
-          className={styles.commandImg}
-          src={`/images/commands/${modalData.name}.png`}
-          alt={modalData.name}
-          onError={e => {
-            console.log("画像が見つかりません:", e.currentTarget.src);
-            (e.currentTarget as HTMLImageElement).style.display = 'none';
-          }}
-        />
+        {imageExists && (
+          <div className={styles.commandImgWrapper}>
+            <Image
+              src={`/images/commands/${modalData.name}.png`}
+              alt={modalData.name}
+              width={400}
+              height={400}
+            />
+          </div>
+        )}
 
         {modalData.options && modalData.options.length > 0 && (
           <div className={styles.optionsContainer}>
-            <div className={styles.optionsTitle}>オプション:</div>
-            <ul id="modal-options">
+            <div className={styles.optionsTitle}>オプション</div>
+            <ul id='modal-options'>
               {modalData.options.map((opt, i) => (
-                <li key={i}>{opt.name} ({opt.type})</li>
+                <li key={i}>
+                  <div>
+                    <span className={styles.optionName}>{opt.name}</span>
+                    {opt.description && (
+                      <p className={styles.optionDesc}>{opt.description}</p>
+                    )}
+                  </div>
+                </li>
               ))}
             </ul>
           </div>

@@ -1,35 +1,32 @@
-import styles from "./Footer.module.css";
+import Image from 'next/image';
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const botName = "{ Rilume }";
+  const botName = '{ Rilume }';
+
+  const socialIcons = [
+    { href: 'https://x.com/ryo_001339', alt: 'Twitter', src: '/images/contact/twitter.png' },
+    { href: 'https://github.com/VEDA00133912', alt: 'GitHub', src: '/images/contact/github.png' },
+    { href: 'https://youtube.com/@00139-ryo', alt: 'YouTube', src: '/images/contact/youtube.png' },
+    { href: 'https://discord.gg/ESRGwGQhxc', alt: 'Discord', src: '/images/contact/discord.png' },
+    { href: 'https://instagram.com/ryo.namba_ma13/', alt: 'Instagram', src: '/images/contact/instagram.png' },
+    { href: 'https://tiktok.com/@ryo_001339', alt: 'TikTok', src: '/images/contact/tiktok.png' },
+  ];
 
   return (
-    <footer className={styles.footer}>
-      <div className={styles.socialLinks}>
-        <a href="https://x.com/ryo_001339" target="_blank" rel="noopener noreferrer">
-          <img src="/images/contact/twitter.png" alt="Twitter" />
-        </a>
-        <a href="https://github.com/VEDA00133912" target="_blank" rel="noopener noreferrer">
-          <img src="/images/contact/github.png" alt="GitHub" />
-        </a>
-        <a href="https://youtube.com/@00139-ryo" target="_blank" rel="noopener noreferrer">
-          <img src="/images/contact/youtube.png" alt="YouTube" />
-        </a>
-        <a href="https://discord.gg/ESRGwGQhxc" target="_blank" rel="noopener noreferrer">
-          <img src="/images/contact/discord.png" alt="Discord" />
-        </a>
-        <a href="https://instagram.com/ryo.namba_ma13/" target="_blank" rel="noopener noreferrer">
-          <img src="/images/contact/instagram.png" alt="Instagram" />
-        </a>
-        <a href="https://tiktok.com/@ryo_001339" target="_blank" rel="noopener noreferrer">
-          <img src="/images/contact/tiktok.png" alt="TikTok" />
-        </a>
+    <footer className='footer'>
+      <div className='social-links'>
+        {socialIcons.map((icon) => (
+          <a key={icon.alt} href={icon.href} target='_blank' rel='noopener noreferrer'>
+            <div className='icon-wrapper'>
+              <Image src={icon.src} alt={icon.alt} width={30} height={30} />
+            </div>
+          </a>
+        ))}
       </div>
-      <p className={styles.copy}>
+      <p className='copy'>
         © {year} {botName} All rights reserved.
       </p>
-      {/* BOT-ICON: https://x.com/shouu_kyun/status/1454722759154487296 */}
     </footer>
   );
 }

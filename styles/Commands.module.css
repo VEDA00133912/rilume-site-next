@@ -101,15 +101,22 @@
   color: #1a1a1a;
 }
 
-.commandImg {
+.commandImgWrapper {
   display: block;
   width: 100%;
-  height: auto;
   max-height: 60vh;
-  object-fit: contain; 
   margin: 10px auto;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  position: relative; /* next/image 用 */
+  overflow: hidden;
+}
+
+.commandImgWrapper img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .optionsContainer {
@@ -134,8 +141,21 @@
 }
 
 #modal-options li {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   font-size: 0.95em;
   color: #1a1a1a;
 }
 
+.optionName {
+  font-weight: bold;
+  font-size: 1em;
+  color: #333;
+  display: block;
+}
+
+.optionDesc {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 2px;
+  line-height: 1.4;
+}

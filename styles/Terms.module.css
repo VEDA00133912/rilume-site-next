@@ -35,7 +35,6 @@
   font-size: 1em;
 }
 
-/* スクロールバー */
 .termsSection::-webkit-scrollbar,
 .privacySection::-webkit-scrollbar {
   width: 8px;
@@ -49,7 +48,6 @@
   border-radius: 4px;
 }
 
-/* レスポンシブ */
 @media (max-width: 1024px) {
   .termsSection, .privacySection {
     height: 110px;
