@@ -9,27 +9,37 @@ const mochiyPop = Mochiy_Pop_One({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://rilume-site-next.vercel.app/'),
   title: 'Rilume - 多機能DiscordBOT',
   description: 'Rilumeは便利な多機能DiscordBOTです！',
   icons: {
     icon: [
-      { url: '/images/meta/favicon.png', type: 'image/png', sizes: '32x32' },
       { url: '/images/meta/favicon.png', type: 'image/png', sizes: '16x16' },
+      { url: '/images/meta/favicon.png', type: 'image/png', sizes: '32x32' },
     ],
     apple: '/images/meta/favicon.png',
   },
   openGraph: {
-    title: 'Rilume - 多機能DiscordBOT',
-    description: 'Rilumeは便利な多機能DiscordBOTです！',
-    url: 'https://your-site-url.com',
-    siteName: 'Rilume',
+    title: '{ Rilume } - 多機能DiscordBOT',
+    description: 'Rilumeは多機能DiscordBOTです!!',
+    url: 'https://rilume-site-next.vercel.app',
+    siteName: 'RilumeSite',
     locale: 'ja_JP',
     type: 'website',
+    images: [
+      {
+        url: 'https://rilume-site-next.vercel.app/images/meta/rilume-og.png',
+        width: 1024,
+        height: 576,
+        alt: '{ Rilume } - 多機能DiscordBOT',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Rilume - 多機能DiscordBOT',
-    description: 'Rilumeは便利な多機能DiscordBOTです！',
+    title: '{ Rilume } - 多機能DiscordBOT',
+    description: 'Rilumeは多機能DiscordBOTです!',
+    images: ['https://rilume-site-next.vercel.app/images/meta/rilume-og.png'],
   },
 };
 
