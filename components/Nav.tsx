@@ -16,6 +16,9 @@ export default function Nav() {
         <li>
           <Link href='/support'>Support</Link>
         </li>
+        <li>
+          <Link href='/status'>Status</Link>
+        </li>
       </ul>
     </nav>
   );

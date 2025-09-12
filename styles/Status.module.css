@@ -1,0 +1,78 @@
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex;
+  align-items: center;
+  padding: 20px;
+  margin: 0 auto;
+  text-align: center;
+  min-height: 80vh;
+}
+
+.loading {
+  font-size: 1.2em;
+  color: #555;
+}
+
+.error {
+  font-size: 1.1em;
+  color: red;
+}
+
+.statusCard {
+  background-color: #abd2ef;
+  border-radius: 20px;
+  padding: 30px 25px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.statusCard p {
+  font-size: 1.1em;
+  margin: 12px 0;
+}
+
+.online {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.offline {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 15px;
+    min-height: auto;
+  }
+
+  .statusCard {
+    padding: 20px;
+  }
+
+  .statusCard p {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin: 0 10px;
+  }
+
+  .statusCard {
+    padding: 15px;
+  }
+
+  .statusCard p {
+    font-size: 0.95em;
+  }
+}
