@@ -6,7 +6,7 @@ import TopButton from '../components/TopButton';
 
 export default function HomePage() {
   const botName = '{ Rilume }';
-  const botInvite = 'https://discord.com/oauth2/authorize?client_id=1408702490211258471'; 
+  const botInvite = 'https://discord.com/oauth2/authorize?client_id=1404988583626014740'; 
   const supportServer = 'https://discord.gg/ESRGwGQhxc';
 
   return (
