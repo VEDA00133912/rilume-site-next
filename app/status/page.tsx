@@ -21,6 +21,7 @@ export default function StatusPage() {
     const fetchStatus = async () => {
       try {
         const res = await fetch('/api/status');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
         setStatus(data);
       } catch (err) {
@@ -32,6 +33,12 @@ export default function StatusPage() {
     };
     fetchStatus();
   }, []);
+
+  const isStale =
+    status &&
+    Date.now() - new Date(status.lastUpdate).getTime() > 30 * 60 * 1000;
+
+  const isOnline = status ? (isStale ? false : status.online) : false;
 
   return (
     <>
@@ -46,8 +53,8 @@ export default function StatusPage() {
             <div className={styles.statusCard}>
               <p>
                 <strong>ステータス:</strong>{' '}
-                <span className={status.online ? styles.online : styles.offline}>
-                  {status.online ? 'Online' : 'Offline'}
+                <span className={isOnline ? styles.online : styles.offline}>
+                  {isOnline ? 'Online' : 'Offline'}
                 </span>
               </p>
               <p>
@@ -58,11 +65,13 @@ export default function StatusPage() {
               </p>
               <p>
                 <strong>最終確認時刻:</strong>{' '}
-                {new Date(status.lastUpdate).toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })}
+                {new Date(status.lastUpdate).toLocaleString('ja-JP', {
+                  timeZone: 'Asia/Tokyo',
+                })}
               </p>
             </div>
             <p style={{ marginTop: '10px', fontWeight: 'bold', fontSize: '1.1em' }}>
-              現在BOTは{status.online ? '正常に動作しています' : '停止しています'}
+              現在BOTは{isOnline ? '正常に動作しています' : '停止しています'}
             </p>
           </>
         )}
