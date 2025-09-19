@@ -38,8 +38,9 @@ async function fetchCommandsFromDiscord() {
     if (!res.ok) throw new Error(`Discord API returned ${res.status}`);
     const commands: DiscordCommand[] = await res.json();
     cachedCommands = commands;
-    console.log(`[${new Date().toLocaleString()}] Discord commands updated (${commands.length} commands)`);
-  } catch (err: unknown) {
+    const jstTime = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
+    console.log(`[${jstTime}] Discord commands updated (${commands.length} commands)`);
+    } catch (err: unknown) {
     if (err instanceof Error) {
       console.error('Failed to fetch Discord commands:', err.message);
     } else {
