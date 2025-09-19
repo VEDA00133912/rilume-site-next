@@ -50,10 +50,24 @@ const CommandsPage: React.FC<Props> = ({ commands }) => {
     img.onerror = () => setImageExists(false);
   }, [modalData]);
 
-  const slashCommands = commands.filter(c => c.description);
-  const contextCommands = commands.filter(c => !c.description);
-  const userCommands = contextCommands.filter(c => c.type === 2);
-  const messageCommands = contextCommands.filter(c => c.type === 3);
+  const sortCommands = (arr: DiscordCommand[]) =>
+    [...arr].sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+
+      const isNumA = /^\d/.test(nameA);
+      const isNumB = /^\d/.test(nameB);
+
+      if (isNumA && !isNumB) return -1;
+      if (!isNumA && isNumB) return 1;
+
+      return nameA.localeCompare(nameB, 'en', { numeric: true });
+    });
+
+  const slashCommands = sortCommands(commands.filter(c => c.description));
+  const contextCommands = sortCommands(commands.filter(c => !c.description));
+  const userCommands = sortCommands(contextCommands.filter(c => c.type === 2));
+  const messageCommands = sortCommands(contextCommands.filter(c => c.type === 3));
 
   const renderCommandCard = (cmd: DiscordCommand, isContext = false) => (
     <div
