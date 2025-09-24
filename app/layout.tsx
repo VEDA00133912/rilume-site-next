@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     ],
     apple: '/images/meta/favicon.png',
   },
+  verification: {
+    google: 'hlIYktDlMzLRRiNPFOyZcWr-NIhpcKpt1AWbqLRiWnw'
+  },
   openGraph: {
     title: '{ Rilume } - 多機能DiscordBOT',
     description: 'Rilumeは多機能DiscordBOTです!!',
