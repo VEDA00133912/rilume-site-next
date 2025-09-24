@@ -4,7 +4,7 @@ import BotHeader from '../../components/BotHeader';
 import styles from '../../styles/Support.module.css';
 
 export default function SupportPage() {
-  const supportServer = 'https://discord.gg/ESRGwGQhxc';
+  const supportServer = 'https://discord.gg/CytkCY2zpf';
   const twitter = 'https://x.com/ryo_001339';
 
   return (
